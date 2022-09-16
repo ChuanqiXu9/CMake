@@ -35,15 +35,9 @@ std::string CxxModuleMapContentClang(CxxModuleLocations const& loc,
 
   // A series of flags which tell the compiler where to look for modules with a
   // given name.
-
-  for (auto const& p : obj.Provides) {
-    if (auto bmi_loc = loc.BmiGeneratorPathForModule(p.LogicalName)) {
-      mm << "-fmodule-file=" << p.LogicalName << '=' << *bmi_loc << '\n';
-    }
-  }
   for (auto const& r : obj.Requires) {
     if (auto bmi_loc = loc.BmiGeneratorPathForModule(r.LogicalName)) {
-      mm << "-fmodule-file=" << r.LogicalName << '=' << *bmi_loc << '\n';
+      mm << "-fmodule-file=" << *bmi_loc << '\n';
     }
   }
 
