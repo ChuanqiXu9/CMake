@@ -1184,7 +1184,8 @@ void cmGlobalNinjaGenerator::AddAdditionalCleanFile(std::string fileName,
 }
 
 void cmGlobalNinjaGenerator::AddCXXCompileCommand(
-  const std::string& commandLine, const std::string& sourceFile)
+  const std::string& commandLine, const std::string& sourceFile,
+  const std::string& objPath)
 {
   // Compute Ninja's build file path.
   std::string buildFileDir =
@@ -1218,7 +1219,9 @@ void cmGlobalNinjaGenerator::AddCXXCompileCommand(
      << R"(  "command": ")"
      << cmGlobalGenerator::EscapeJSON(commandLine) << "\",\n"
      << R"(  "file": ")"
-     << cmGlobalGenerator::EscapeJSON(sourceFileName) << "\"\n"
+     << cmGlobalGenerator::EscapeJSON(sourceFileName) << "\",\n"
+     << R"(  "output": ")"
+     << cmGlobalGenerator::EscapeJSON(objPath) << "\"\n"
      << "}";
   /* clang-format on */
 }
